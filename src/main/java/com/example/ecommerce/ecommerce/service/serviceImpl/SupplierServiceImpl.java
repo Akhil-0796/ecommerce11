@@ -17,7 +17,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier addSupplier(Supplier supplier) {
-        supplier.setId(UUID.randomUUID());
+        supplier.setId(UUID.randomUUID().toString());
         return supplierRepository.save(supplier);
     }
 
@@ -27,13 +27,13 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Optional<Supplier> findById(UUID supplier_id) {
-        return supplierRepository.findById(supplier_id);
+    public Optional<Supplier> findById(String supplierId) {
+        return supplierRepository.findById(supplierId);
     }
 
     @Override
-    public void deleteById(UUID supplier_id) {
-        supplierRepository.deleteById(supplier_id);
+    public void deleteById(String supplierId) {
+        supplierRepository.deleteById(supplierId);
     }
 
     @Override

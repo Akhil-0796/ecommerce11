@@ -14,7 +14,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 public class UserType {
 
     @PrimaryKey
-    private Integer id;
+    private String id;
 
     private String name;
 }

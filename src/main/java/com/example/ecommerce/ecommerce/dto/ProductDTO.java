@@ -1,29 +1,21 @@
-package com.example.ecommerce.ecommerce.model;
-
+package com.example.ecommerce.ecommerce.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table
-public class Product {
+public class ProductDTO {
 
-    @PrimaryKey
-    @Column(value = "product_id")
+
     private String productId;
-
-    @Column(value = "product_name")
     private String productName;
-    @Column(value = "category_id")
     private int categoryId;
     private Double price;
     private Double discount;
@@ -31,10 +23,5 @@ public class Product {
     private List<String> reviews;
     private Integer stock;
     private String description;
-    @Column(value = "supplier_id")
     private String supplierId;
-
-
-
-
 }

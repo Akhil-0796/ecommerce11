@@ -1,27 +1,23 @@
-package com.example.ecommerce.ecommerce.model;
-
+package com.example.ecommerce.ecommerce.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Table
-public class ProductReview {
+@AllArgsConstructor
+public class UserDTO {
 
-    @PrimaryKey
     private String id;
-
-    private String review;
-    @Column(value = "user_id")
-    private String userId;
-
+    private String name;
+    private String email;
+    private List<String> orderIds;
+    private String mobile;
+    private String role;
 }

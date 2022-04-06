@@ -6,7 +6,6 @@ import com.example.ecommerce.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,18 +15,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public User addUser(User user) {
         if(!userAlreadyPresent(user)) return null;
-       user.setId(UUID.randomUUID());
-        BCryptPasswordEncoder bCryptPasswordEncoder =
-                new BCryptPasswordEncoder(10, new SecureRandom());
-       user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+       user.setId(UUID.randomUUID().toString());
+       user.setPassword(passwordEncoder.encode(user.getPassword()));
        return userRepository.save(user);
     }
 
     @Override
-    public User findUserById(UUID id) {
+    public User findUserById(String id) {
         Optional<User> user =  userRepository.findById(id);
         if(user.isPresent()) return user.get();
         return null;
@@ -47,13 +47,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(UUID user_id) {
-        userRepository.deleteById(user_id);
+    public void deleteUser(String userId) {
+        userRepository.deleteById(userId);
     }
 
     @Override
-    public Optional<User> findById(UUID user_id) {
-        return userRepository.findById(user_id);
+    public Optional<User> findById(String userId) {
+        return userRepository.findById(userId);
     }
 
     private boolean userAlreadyPresent(User user) {

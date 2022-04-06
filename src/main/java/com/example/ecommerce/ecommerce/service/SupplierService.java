@@ -13,9 +13,9 @@ public interface SupplierService {
 
     List<Supplier> getAllSupplier();
 
-    Optional<Supplier> findById(UUID supplier_id);
+    Optional<Supplier> findById(String supplierId);
 
-    void deleteById(UUID supplier_id);
+    void deleteById(String supplierId);
 
     void updateSupplier(Supplier supplier);
 }

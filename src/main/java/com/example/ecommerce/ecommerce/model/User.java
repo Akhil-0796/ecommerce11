@@ -4,6 +4,7 @@ package com.example.ecommerce.ecommerce.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
@@ -18,14 +19,18 @@ import java.util.UUID;
 public class User {
 
     @PrimaryKey
-    private UUID id;
+    private String id;
     private String name;
-    private String user_name;
-    private String password;
-    private List<Integer> order_ids;
+    @Column(value = "user_name")
     private String email;
+
+    private String password;
+    @Column(value = "order_ids")
+    private List<String> orderIds;
+
     private String mobile;
-    private LocalDateTime creation_time;
-    private String user_type;
+    @Column(value = "creation_time")
+    private LocalDateTime creationTime;
+    private String role;
 
 }

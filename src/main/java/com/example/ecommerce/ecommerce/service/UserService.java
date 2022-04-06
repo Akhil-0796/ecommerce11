@@ -11,13 +11,13 @@ import java.util.UUID;
 public interface UserService {
     User addUser(User user);
 
-    User findUserById(UUID id);
+    User findUserById(String id);
 
     List<User> findAllUsers();
 
     boolean updateUser(User user);
 
-    void deleteUser(UUID user_id);
+    void deleteUser(String userId);
 
-    Optional<User> findById(UUID user_id);
+    Optional<User> findById(String userId);
 }

@@ -5,5 +5,5 @@ import org.springframework.data.cassandra.repository.CassandraRepository;
 
 import java.util.UUID;
 
-public interface SupplierRepository extends CassandraRepository<Supplier, UUID> {
+public interface SupplierRepository extends CassandraRepository<Supplier, String> {
 }

@@ -22,27 +22,27 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
-    @PostMapping("/add-product")
+    @PostMapping("/add")
     public Product addProduct(@RequestBody Product product){
-        product.setProduct_id(UUID.randomUUID());
+        product.setProductId(UUID.randomUUID().toString());
         return productService.addProduct(product);
     }
 
-    @GetMapping("/all-products")
+    @GetMapping("/all")
     public List<Product> getAllProducts(){
         return productService.getAllProducts();
     }
 
-    @DeleteMapping("/delete-product/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable UUID product_id){
-        if(!productRepository.findById(product_id).isPresent()) return new ResponseEntity<>("Product Not Found ", HttpStatus.NOT_FOUND);
-        productRepository.deleteById(product_id);
+    @DeleteMapping("/delete-by-id/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable String productId){
+        if(!productRepository.findById(productId).isPresent()) return new ResponseEntity<>("Product Not Found ", HttpStatus.NOT_FOUND);
+        productRepository.deleteById(productId);
         return new ResponseEntity<>("Product Deleted",HttpStatus.OK);
     }
 
-    @GetMapping("/get-product-by-id/{id}")
-    public Product getProductById(@PathVariable UUID product_id){
-        if(!productRepository.findById(product_id).isPresent()) return null;
-        return productService.findById(product_id);
+    @GetMapping("/get-by-id/{id}")
+    public Product getProductById(@PathVariable String productId){
+        if(!productRepository.findById(productId).isPresent()) return null;
+        return productService.findById(productId);
     }
 }

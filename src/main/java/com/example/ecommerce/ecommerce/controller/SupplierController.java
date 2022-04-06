@@ -17,32 +17,32 @@ public class SupplierController {
     @Autowired
     private SupplierService supplierService;
 
-    @PostMapping("/add-supplier")
+    @PostMapping("/add")
     public Supplier addSupplier(@RequestBody Supplier supplier){
         return supplierService.addSupplier(supplier);
     }
 
-    @GetMapping("/get-all-supplier")
+    @GetMapping("/get-all")
     public List<Supplier> getAllSupplier(){
         return supplierService.getAllSupplier();
     }
 
-    @DeleteMapping("/delete-supplier-by-id/{id}")
-    public ResponseEntity<?> deleteSupplier(@PathVariable UUID supplier_id){
-        if(!supplierService.findById(supplier_id).isPresent()) return new ResponseEntity<>("Supplier Not Found", HttpStatus.NOT_FOUND);
-        supplierService.deleteById(supplier_id);
+    @DeleteMapping("/delete-by-id/{id}")
+    public ResponseEntity<?> deleteSupplier(@PathVariable String supplierId){
+        if(!supplierService.findById(supplierId).isPresent()) return new ResponseEntity<>("Supplier Not Found", HttpStatus.NOT_FOUND);
+        supplierService.deleteById(supplierId);
         return new ResponseEntity<>("Supplier Deleted",HttpStatus.OK);
     }
 
-    @PutMapping("/update-supplier")
+    @PutMapping("/update")
     public ResponseEntity<?> updateSupplier(@RequestBody Supplier supplier){
         if(!supplierService.findById(supplier.getId()).isPresent()) return new ResponseEntity<>("No Supplier Found",HttpStatus.NOT_FOUND);
         supplierService.updateSupplier(supplier);
         return new ResponseEntity<>("Supplier Updated",HttpStatus.OK);
     }
 
-    @GetMapping("/get-supplier-by-id/{id}")
-    public Supplier getSupplierById(@PathVariable UUID supplier_id){
-        return supplierService.findById(supplier_id).get();
+    @GetMapping("/by-id/{id}")
+    public Supplier getSupplierById(@PathVariable String supplierId){
+        return supplierService.findById(supplierId).get();
     }
 }

@@ -12,5 +12,7 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    Product findById(UUID product_id);
+    Product findById(String productId);
+
+    List<Product> findAllProduct(List<String> items);
 }

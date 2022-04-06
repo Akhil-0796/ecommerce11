@@ -5,5 +5,5 @@ import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRepository extends CassandraRepository<Category,Integer>{
+public interface CategoryRepository extends CassandraRepository<Category,String>{
 }
