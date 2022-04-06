@@ -26,11 +26,11 @@ public class DtoMapper {
         return modelMapper.map(userDTO,User.class);
     }
 
-    public ProductReview productReviewDtoToProductReview(ProductReviewDTO productReviewDTO) {
+    public ProductReview productReviewToProductReviewDto(ProductReviewDTO productReviewDTO) {
         return modelMapper.map(productReviewDTO,ProductReview.class);
     }
 
-    public ProductReviewDTO productReviewDtoToProductReview(ProductReview productReview){
+    public ProductReviewDTO productReviewToProductReviewDto(ProductReview productReview){
         return modelMapper.map(productReview,ProductReviewDTO.class);
     }
 

@@ -7,4 +7,10 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ProductReviewService {
     ProductReview addReview(ProductReviewDTO productReviewDTO);
+
+    ProductReviewDTO update(ProductReviewDTO productReviewDTO);
+
+    boolean deleteReview(String reviewId);
+
+    ProductReviewDTO getReviewById(String reviewId);
 }

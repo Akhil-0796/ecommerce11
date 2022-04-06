@@ -24,4 +24,7 @@ public class ProductReview {
     @Column(value = "user_id")
     private String userId;
 
+    @Column(value = "product_id")
+    private String productId;
+
 }
