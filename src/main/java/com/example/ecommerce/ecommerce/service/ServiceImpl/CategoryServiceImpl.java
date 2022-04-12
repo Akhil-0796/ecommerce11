@@ -1,12 +1,14 @@
-package com.example.ecommerce.ecommerce.service.serviceImpl;
+package com.example.ecommerce.ecommerce.service.ServiceImpl;
 
 import com.example.ecommerce.ecommerce.model.Category;
 import com.example.ecommerce.ecommerce.repository.CategoryRepository;
 import com.example.ecommerce.ecommerce.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
 

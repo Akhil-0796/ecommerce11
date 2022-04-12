@@ -1,9 +1,8 @@
 package com.example.ecommerce.ecommerce.controller;
 
-import com.example.ecommerce.ecommerce.dto.PaymentDetails;
+import com.example.ecommerce.ecommerce.dto.OrderDTO;
 import com.example.ecommerce.ecommerce.model.Order;
 import com.example.ecommerce.ecommerce.service.OrderService;
-import com.paypal.base.rest.PayPalRESTException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/")
 public class OrderController {
 
     @Autowired
@@ -21,34 +20,28 @@ public class OrderController {
 
 
     @PostMapping("user/order/validate")
-    public ResponseEntity<Map<String,String>> validateOrder(@RequestBody Order order){
-        Map<String,String> response  = orderService.validateOrder(order);
+    public ResponseEntity<Map<String,String>> validateOrder(@RequestBody OrderDTO orderDTO){
+        Map<String,String> response  = orderService.validateOrder(orderDTO);
         if(response.size()==0) return new ResponseEntity<>(response,HttpStatus.NOT_ACCEPTABLE);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     @PostMapping("user/order/add")
-    public ResponseEntity<Order> addOrder(@RequestBody Order order){
-        Order response = orderService.addOrder(order);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+    public ResponseEntity<OrderDTO> addOrder(@RequestBody OrderDTO orderDTO) {
+        OrderDTO response = orderService.addOrder(orderDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("user/order/pay-order")
-    public ResponseEntity<Order> payOrder(@PathVariable PaymentDetails paymentDetails) throws PayPalRESTException {
-        Order response = orderService.pay(paymentDetails);
-         return new ResponseEntity<>(response,HttpStatus.OK);
+    @GetMapping("order/by-id/{orderId}")
+    public ResponseEntity<?> getOrderDetailsByOrderId(@PathVariable("orderId") String orderId){
+        OrderDTO response = orderService.findOrderById(orderId);
+        if(response == null) return new ResponseEntity<>("No Order with given order-id",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(response,HttpStatus.FOUND);
     }
 
-    @GetMapping("order/by-id/{id}")
-    public ResponseEntity<Order> getOrderDetailsByOrderId(@PathVariable String orderId){
-        if(!orderService.findOrderById(orderId).isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        Order order = orderService.findOrderById(orderId).get();
-        return new ResponseEntity<>(order,HttpStatus.FOUND);
-    }
-
-     @DeleteMapping("user/cancel-order/{id}")
+     @DeleteMapping("cancel-order/{orderId}")
     public ResponseEntity<String> cancelOrder(@PathVariable String orderId){
-         if(!orderService.findOrderById(orderId).isPresent()) return new ResponseEntity<>("No Order Found.",HttpStatus.NOT_FOUND);
+         if(orderService.findOrderById(orderId)==null) return new ResponseEntity<>("No Order Found.",HttpStatus.NOT_FOUND);
          boolean response  = orderService.cancelOrder(orderId);
          if(response==true) return new ResponseEntity<>("Order Cancelled",HttpStatus.OK);
          else return new ResponseEntity<>("Only Accepted or Pending Order cane be canceled",HttpStatus.OK);
@@ -58,6 +51,5 @@ public class OrderController {
     public List<Order> getAllOrder(){
         return orderService.getAllOrders();
     }
-
 
 }

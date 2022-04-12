@@ -4,8 +4,10 @@ import com.example.ecommerce.ecommerce.model.ProductReview;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface ProductReviewRepository extends CassandraRepository<ProductReview, String> {
+    List<ProductReview> findAllByProductId(String productId);
 }

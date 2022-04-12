@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 import java.util.UUID;
 
 @SpringBootApplication
-@ComponentScan("com.example.ecommerce.ecommerce.service")
+@ComponentScan("com.example.*")
 public class EcommerceApplication {
 
 	@Autowired

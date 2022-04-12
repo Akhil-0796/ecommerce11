@@ -1,11 +1,11 @@
 package com.example.ecommerce.ecommerce.config;
 
 import com.example.ecommerce.ecommerce.model.User;
-import com.sun.tools.javac.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class CustomUserDetail implements UserDetails {
@@ -20,7 +20,9 @@ public class CustomUserDetail implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getRole());
-        return List.of(simpleGrantedAuthority);
+        ArrayList<SimpleGrantedAuthority> res = new ArrayList<>();
+        res.add(simpleGrantedAuthority);
+        return res;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class CustomUserDetail implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return user.getName();
     }
 
     @Override

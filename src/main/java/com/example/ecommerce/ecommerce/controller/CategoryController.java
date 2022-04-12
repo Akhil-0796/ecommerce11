@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping("admin/category")
 public class CategoryController {
 
     @Autowired
@@ -21,8 +21,8 @@ public class CategoryController {
         return categoryService.addCategory(category);
     }
 
-    @GetMapping("/get{id}")
-    public ResponseEntity<Category> getCategory(@PathVariable String categoryId){
+    @PostMapping("/get{categoryId}")
+    public ResponseEntity<Category> getCategory(@PathVariable("categoryId") String categoryId){
         Optional<Category> category = categoryService.getCategoryById(categoryId);
         if(!category.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return  new ResponseEntity<>(category.get(),HttpStatus.OK);
@@ -34,8 +34,8 @@ public class CategoryController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable String categoryId){
+    @DeleteMapping("/delete/{categoryId}")
+    public String deleteCategory(@PathVariable("categoryId") String categoryId){
         boolean response = categoryService.deleteCategory(categoryId);
         if(response) return "Deleted.";
         else return "No Category Found";

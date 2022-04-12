@@ -1,29 +1,41 @@
-package com.example.ecommerce.ecommerce.service.serviceImpl;
+package com.example.ecommerce.ecommerce.service.ServiceImpl;
 
 import com.example.ecommerce.ecommerce.dto.ProductReviewDTO;
 import com.example.ecommerce.ecommerce.model.ProductReview;
+import com.example.ecommerce.ecommerce.repository.ProductRepository;
 import com.example.ecommerce.ecommerce.repository.ProductReviewRepository;
 import com.example.ecommerce.ecommerce.service.ProductReviewService;
 import com.example.ecommerce.ecommerce.util.DtoMapper;
 import com.example.ecommerce.ecommerce.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+@Service
 public class ProductReviewServiceImpl implements ProductReviewService {
 
     @Autowired
     private ProductReviewRepository productReviewRepository;
 
     @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
     private DtoMapper dtoMapper;
 
     @Override
-    public ProductReview addReview(ProductReviewDTO productReviewDTO) {
+    public ProductReviewDTO addReview(ProductReviewDTO productReviewDTO) {
         ProductReview productReview = dtoMapper.productReviewToProductReviewDto(productReviewDTO);
+        if(productReviewDTO.getId().isEmpty())
         productReview.setId(UUID.randomUUID().toString());
-        return productReviewRepository.save(productReview);
+        productReview.setUserId(UUID.randomUUID().toString());
+        productReview.setProductId(productReviewDTO.getProductId());
+        return dtoMapper.productReviewToProductReviewDto(productReviewRepository.save(productReview));
     }
 
     @Override
@@ -56,5 +68,27 @@ public class ProductReviewServiceImpl implements ProductReviewService {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public boolean findProductById(String productId) {
+        if(productRepository.findById(productId).isPresent()) return true;
+        else
+            return false;
+    }
+
+    @Override
+    public List<ProductReviewDTO> getReviewsByProductId(String productId) {
+        List<ProductReview> response  = productReviewRepository.findAllByProductId(productId);
+        return new ArrayList<>();
+    }
+
+    @Override
+    public List<ProductReviewDTO> findAllReviews() {
+        List<ProductReviewDTO> response  = new ArrayList<>();
+        for(ProductReview productReview:productReviewRepository.findAll()){
+            response.add(dtoMapper.productReviewToProductReviewDto(productReview));
+        }
+        return response;
     }
 }

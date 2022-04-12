@@ -1,16 +1,22 @@
 package com.example.ecommerce.ecommerce.service;
 
 import com.example.ecommerce.ecommerce.dto.ProductReviewDTO;
-import com.example.ecommerce.ecommerce.model.ProductReview;
-import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
+
+
 public interface ProductReviewService {
-    ProductReview addReview(ProductReviewDTO productReviewDTO);
+    ProductReviewDTO addReview(ProductReviewDTO productReviewDTO);
 
     ProductReviewDTO update(ProductReviewDTO productReviewDTO);
 
     boolean deleteReview(String reviewId);
 
     ProductReviewDTO getReviewById(String reviewId);
+
+    boolean findProductById(String productId);
+
+    List<ProductReviewDTO> getReviewsByProductId(String productId);
+
+    List<ProductReviewDTO> findAllReviews();
 }

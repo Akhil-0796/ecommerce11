@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -52,9 +53,13 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().antMatchers("api/admin/**").hasRole("ADMIN")
-                .antMatchers("api/user/**").hasRole("USER")
-                .antMatchers(("api/supplier/**")).hasRole("SUPPLIER")
-                .antMatchers("api/**").permitAll();
+//        http.authorizeHttpRequests().antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/user/**").hasRole("USER")
+//                .antMatchers(("/supplier/**")).hasRole("SUPPLIER")
+//                .antMatchers("/**").permitAll()
+//                .and().csrf().disable();
+
+        http.authorizeHttpRequests().anyRequest().permitAll()
+                .and().csrf().disable();
     }
 }

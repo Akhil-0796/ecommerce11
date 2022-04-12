@@ -8,6 +8,7 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -22,6 +23,8 @@ public class Supplier {
     private String supplierName;
     @Column(value = "address")
     private String address;
+    @Column(value = "category")
+    private List<String> categories;
 
 
 }

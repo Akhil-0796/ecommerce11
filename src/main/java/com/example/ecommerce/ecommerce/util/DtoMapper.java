@@ -1,13 +1,7 @@
 package com.example.ecommerce.ecommerce.util;
 
-import com.example.ecommerce.ecommerce.dto.OrderDTO;
-import com.example.ecommerce.ecommerce.dto.ProductDTO;
-import com.example.ecommerce.ecommerce.dto.ProductReviewDTO;
-import com.example.ecommerce.ecommerce.dto.UserDTO;
-import com.example.ecommerce.ecommerce.model.Order;
-import com.example.ecommerce.ecommerce.model.Product;
-import com.example.ecommerce.ecommerce.model.ProductReview;
-import com.example.ecommerce.ecommerce.model.User;
+import com.example.ecommerce.ecommerce.dto.*;
+import com.example.ecommerce.ecommerce.model.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -48,5 +42,13 @@ public class DtoMapper {
 
     public Order orderToOrderDTO(OrderDTO orderDTO){
         return modelMapper.map(orderDTO,Order.class);
+    }
+
+    public Supplier supplierDtoToupplier(SupplierDTO supplierDTO) {
+        return modelMapper.map(supplierDTO,Supplier.class);
+    }
+
+    public SupplierDTO SupplierToDTO(Supplier supplier) {
+        return modelMapper.map(supplier,SupplierDTO.class);
     }
 }

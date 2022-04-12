@@ -20,4 +20,5 @@ public class UserDTO {
     private List<String> orderIds;
     private String mobile;
     private String role;
+    private String password;
 }
