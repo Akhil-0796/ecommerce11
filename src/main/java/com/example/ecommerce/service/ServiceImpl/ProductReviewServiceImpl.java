@@ -34,7 +34,8 @@ public class ProductReviewServiceImpl implements ProductReviewService {
         productReview.setId(UUID.randomUUID().toString());
         productReview.setUserId(UUID.randomUUID().toString());
         productReview.setProductId(productReviewDTO.getProductId());
-        return dtoMapper.productReviewToProductReviewDto(productReviewRepository.save(productReview));
+        productReviewRepository.save(productReview);
+        return dtoMapper.productReviewToProductReviewDto(productReview);
     }
 
     @Override

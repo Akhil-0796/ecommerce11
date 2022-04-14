@@ -24,7 +24,8 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO addProduct(ProductDTO productDTO) {
         if (productDTO.getProductId().isEmpty())
         productDTO.setProductId(UUID.randomUUID().toString());
-        return dtoMapper.productToProductDto(productRepository.save(dtoMapper.productDtoToProduct(productDTO)));
+        productRepository.save(dtoMapper.productDtoToProduct(productDTO));
+        return productDTO;
     }
 
     @Override

@@ -52,7 +52,8 @@ public class OrderServiceImpl implements OrderService {
             orderDTO.setOrderId(UUID.randomUUID().toString());
             orderDTO.setOrderStatus(OrderStatusEnum.PENDING.toString());
             orderDTO.setOrderTime(LocalDateTime.now());
-            return dtoMapper.orderToOrderDto(orderRepository.save(dtoMapper.orderToOrderDTO(orderDTO)));
+            orderRepository.save(dtoMapper.orderToOrderDTO(orderDTO));
+            return orderDTO;
         }catch (Exception e){
             return null;
         }

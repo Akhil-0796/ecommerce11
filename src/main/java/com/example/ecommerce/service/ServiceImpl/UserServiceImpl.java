@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService {
        user.setId(UUID.randomUUID().toString());
        user.setPassword(passwordEncoder.encode(user.getPassword()));
        user.setCreationTime(LocalDateTime.now());
-       return dtoMapper.userToDTO(userRepository.save(user));
+        userRepository.save(user);
+       return dtoMapper.userToDTO(user);
     }
 
     @Override

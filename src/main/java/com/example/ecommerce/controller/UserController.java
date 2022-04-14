@@ -94,9 +94,4 @@ public class UserController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-    @GetMapping("hell")
-    public String hello(){
-        return "hello akhil";
-    }
-
 }

@@ -19,7 +19,8 @@ public class CategoryServiceImpl implements CategoryService {
     public Category addCategory(Category category) {
         Integer categoryCount = categoryRepository.findAll().size();
         category.setCategoryId(Integer.toString(categoryCount+1));
-        return categoryRepository.save(category);
+        categoryRepository.save(category);
+         return category;
     }
 
     @Override

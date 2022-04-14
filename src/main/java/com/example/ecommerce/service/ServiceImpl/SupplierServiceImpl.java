@@ -27,7 +27,8 @@ public class SupplierServiceImpl implements SupplierService {
         if(supplierRepository.findBySupplierName(supplierDTO.getSupplierName())!=null) return null;
         Supplier supplier = dtoMapper.supplierDtoToupplier(supplierDTO);
         supplier.setId(UUID.randomUUID().toString());
-        return dtoMapper.SupplierToDTO(supplierRepository.save(supplier));
+        supplierRepository.save(supplier);
+        return dtoMapper.SupplierToDTO(supplier);
     }
 
     @Override
